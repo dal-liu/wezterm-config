@@ -9,15 +9,16 @@ local config = wezterm.config_builder()
 -- For example, changing the color scheme:
 config.color_scheme = "Apple System Colors"
 
-config.use_fancy_tab_bar = true
 config.hide_tab_bar_if_only_one_tab = true
 config.window_frame = {
 	-- The size of the font in the tab bar.
-	-- Default to 10.0 on Windows but 12.0 on other systems
 	font_size = 14.0,
 }
 
 config.colors = {
+	-- The color of the scrollbar "thumb"; the portion that represents the current viewport
+	scrollbar_thumb = "#333333",
+
 	tab_bar = {
 		-- The active tab is the one that has focus in the window
 		active_tab = {
@@ -39,6 +40,8 @@ config.window_padding = {
 
 config.font = wezterm.font("JetBrainsMono Nerd Font")
 config.font_size = 16.0
+
+-- Use this for a zero with a line through it rather than a dot
 config.harfbuzz_features = { "zero" }
 
 -- and finally, return the configuration to wezterm
