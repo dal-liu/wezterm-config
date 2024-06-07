@@ -44,5 +44,11 @@ config.font_size = 16.0
 -- Use this for a zero with a line through it rather than a dot
 config.harfbuzz_features = { "zero" }
 
+local mux = wezterm.mux
+wezterm.on("gui-startup", function()
+	local _, _, window = mux.spawn_window({})
+	window:gui_window():maximize()
+end)
+
 -- and finally, return the configuration to wezterm
 return config
