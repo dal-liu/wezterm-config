@@ -1,15 +1,9 @@
--- Pull in the wezterm API
 local wezterm = require("wezterm")
 
--- This will hold the configuration.
 local config = wezterm.config_builder()
 
--- This is where you actually apply your config choices
-
--- For example, changing the color scheme:
 config.color_scheme = "Apple System Colors"
 
-config.hide_tab_bar_if_only_one_tab = true
 config.window_frame = {
 	-- The size of the font in the tab bar.
 	font_size = 14.0,
@@ -27,15 +21,20 @@ config.colors = {
 			-- The color of the text for the tab
 			fg_color = "#c0c0c0",
 		},
+
+		new_tab_hover = {
+			bg_color = "#333333",
+			fg_color = "#c0c0c0",
+		},
 	},
 }
 
 config.enable_scroll_bar = true
 config.window_padding = {
 	left = 8,
-	right = 12,
-	top = 4,
-	bottom = 4,
+	right = 14,
+	top = 8,
+	bottom = 8,
 }
 
 config.font = wezterm.font("JetBrainsMono Nerd Font")
@@ -44,11 +43,14 @@ config.font_size = 16.0
 -- Use this for a zero with a line through it rather than a dot
 config.harfbuzz_features = { "zero" }
 
-local mux = wezterm.mux
-wezterm.on("gui-startup", function()
-	local _, _, window = mux.spawn_window({})
-	window:gui_window():maximize()
+-- Replace title bar with tab bar
+config.window_decorations = "INTEGRATED_BUTTONS | RESIZE"
+
+-- Disable scroll bar when in alt screen mode
+wezterm.on("update-status", function(window, pane)
+	local overrides = window:get_config_overrides() or {}
+	overrides.enable_scroll_bar = not pane:is_alt_screen_active()
+	window:set_config_overrides(overrides)
 end)
 
--- and finally, return the configuration to wezterm
 return config
