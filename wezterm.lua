@@ -6,6 +6,10 @@ local config = wezterm.config_builder()
 
 config.color_scheme = "Apple System Colors"
 
+config.hide_tab_bar_if_only_one_tab = true
+
+config.use_fancy_tab_bar = true
+
 config.window_frame = {
 	font_size = 14.0,
 }
@@ -34,10 +38,8 @@ config.font_size = 16.0
 
 config.harfbuzz_features = { "zero" }
 
-config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
-
 wezterm.on("gui-startup", function(cmd)
-	local tab, pane, window = mux.spawn_window(cmd or {})
+	local _, _, window = mux.spawn_window(cmd or {})
 	window:gui_window():maximize()
 end)
 
