@@ -1,5 +1,7 @@
 local wezterm = require("wezterm")
 
+local mux = wezterm.mux
+
 local config = wezterm.config_builder()
 
 config.color_scheme = "Apple System Colors"
@@ -33,6 +35,11 @@ config.font_size = 16.0
 config.harfbuzz_features = { "zero" }
 
 config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
+
+wezterm.on("gui-startup", function(cmd)
+	local tab, pane, window = mux.spawn_window(cmd or {})
+	window:gui_window():maximize()
+end)
 
 wezterm.on("update-status", function(window, pane)
 	local overrides = window:get_config_overrides() or {}
