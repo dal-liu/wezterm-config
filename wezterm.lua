@@ -4,6 +4,8 @@ local config = wezterm.config_builder()
 
 config.color_scheme = "Apple System Colors"
 
+config.hide_tab_bar_if_only_one_tab = true
+
 config.window_frame = {
 	font_size = 14.0,
 }
@@ -38,7 +40,5 @@ wezterm.on("update-status", function(window, pane)
 	overrides.enable_scroll_bar = dimensions.scrollback_rows > dimensions.viewport_rows
 	window:set_config_overrides(overrides)
 end)
-
-config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
 
 return config
