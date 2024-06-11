@@ -38,11 +38,6 @@ config.font_size = 16.0
 
 config.harfbuzz_features = { "zero" }
 
-wezterm.on("gui-startup", function(cmd)
-	local _, _, window = mux.spawn_window(cmd or {})
-	window:gui_window():maximize()
-end)
-
 wezterm.on("update-status", function(window, pane)
 	local overrides = window:get_config_overrides() or {}
 	local dimensions = pane:get_dimensions()
