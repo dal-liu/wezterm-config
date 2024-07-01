@@ -30,7 +30,7 @@ config.window_padding = {
 	bottom = 4,
 }
 
-config.font = wezterm.font("JetBrainsMono Nerd Font")
+config.font = wezterm.font("JetBrainsMono Nerd Font", { weight = "Medium" })
 
 config.font_size = 16.0
 
